@@ -1,0 +1,17 @@
+.editable-input {
+  color: #212529;
+  background-color: inherit;
+  border: none;
+}
+
+.selected-row {
+  background-color: blue;
+}
+
+.consult-element {
+  position: fixed;
+  right: 16%;
+  top: 10%;
+  background-color: #d7d7d7;
+  padding: 24px;
+}

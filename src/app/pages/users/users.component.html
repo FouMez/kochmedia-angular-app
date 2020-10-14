@@ -1,0 +1,108 @@
+<div class="row">
+  <button (click)="handleAdd()" type="submit" class="btn btn-primary btn-round">
+    Add new user
+  </button>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Users List</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-primary">
+              <th>Name</th>
+
+              <th>Email Address</th>
+              <th>Mobile Number</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of tableData" style="cursor: pointer" [ngClass]="{'selected-row' : isSelected(c._id) }" >
+                <td id="{{ c._id }}"  (click)="onRowClick(c._id)" >
+                  <input
+                    [(ngModel)]="c.Name"
+                    id="{{ 'Name-' + c._id }}"
+                    [readOnly]="!isEditable(c._id)"
+                    [ngClass]="{ 'editable-input': !isEditable(c._id) }"
+                  />
+                </td>
+                <td  (click)="onRowClick(c._id)">
+                  <input
+                    value="{{ c.Email }}"
+                    id="{{ 'Email-' + c._id }}"
+                    [readOnly]="!isEditable(c._id)"
+                    [ngClass]="{ 'editable-input': !isEditable(c._id) }"
+                  />
+                </td>
+                <td  (click)="onRowClick(c._id)">
+                  <input
+                    value="{{ c.Phone }}"
+                    id="{{ 'Phone-' + c._id }}"
+                    [readOnly]="!isEditable(c._id)"
+                    [ngClass]="{ 'editable-input': !isEditable(c._id) }"
+                  />
+                </td>
+
+                <td>
+                  <div *ngIf="rowToEdit === null">
+                    <button
+                      (click)="handleConsult(c._id)"
+                      style="margin: 0 5px"
+                      class="btn btn-sm btn-outline-success btn-round btn-icon"
+                    >
+                      <i class="fa fa-eye"></i>
+                    </button>
+                    <button
+                      (click)="handleEdit(c)"
+                      style="margin: 0 5px"
+                      class="btn btn-sm btn-outline-primary btn-round btn-icon"
+                    >
+                      <i class="fa fa-edit"></i>
+                    </button>
+
+                    <button
+                      (click)="handleDelete(c._id)"
+                      style="margin: 0 5px"
+                      class="btn btn-sm btn-outline-danger btn-round btn-icon"
+                    >
+                      <i class="fa fa-trash"></i>
+                    </button>
+
+
+                    <div *ngIf="rowToConsult" class="consult-element">
+                      <p> <b>Name : </b> {{c.Name}}  </p>
+                      <p><b>Email : </b>  {{c.Email}} </p>
+                      <p><b>Phone : </b>  {{c.Phone}} </p>
+                      <hr />
+                      <button (click)="handleConsult(null)" class="btn btn-sm btn-outline-primary">
+                        Close
+                      </button>
+                    </div>
+
+                  </div>
+                  <div *ngIf="rowToEdit">
+                    <button
+                      (click)="onEditSave(c)"
+                      style="margin: 0 5px"
+                      class="btn btn-sm btn-outline-primary"
+                    >
+                      Save
+                    </button>
+                    <button
+                      (click)="onCancel(c)"
+                      style="margin: 0 5px"
+                      class="btn btn-sm btn-outline-danger"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
